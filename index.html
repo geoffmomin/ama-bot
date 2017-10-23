@@ -2,7 +2,9 @@
   <head>
     <title>AMA Bot</title>
     <link rel="stylesheet" href="coverr/style.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- https://code.jquery.com/jquery-1.12.4.min.js -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="coverr/app.js"></script>
 
 <script>
@@ -19,9 +21,6 @@
   </head>
 
   <body>
-
-    toto
-
     <div class="homepage-hero-module">
       <div class="video-container">
         <div class="filter"></div>
@@ -29,12 +28,13 @@
           <source src="coverr/Oculus/Oculus.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
           <source src="coverr/Oculus/Oculus.webm" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
         </video>
-        <div class="poster hidden">
-          <img src="coverr/Oculus/Oculus.jpg" alt="">
-        </div>
+        <!-- FIXME -->
+        <!-- <div class="poster hidden"><img src="coverr/Oculus/Oculus.jpg" alt=""></div> -->
       </div>
     </div>
 
-    toto
+    <script>
+      Smooch.init({ appId: '59edee9d81ae79002a4816f1' });
+    </script>
   </body>
 </html>
