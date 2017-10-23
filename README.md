@@ -1,8 +1,12 @@
 # ama-bot
 Bot ask for asking me anything
 
+Test the bot here: https://mycaule.github.io/ama-bot/
+
+![screenshot](images/screenshot.png)
+
 ## TODO
-- [ ] Implement a webchat bot on Smooch.io
+- [x] Implement a webchat bot on Smooch.io
 - [ ] [Dialogflow](https://dialogflow.com) and Smalltalk Intent
 - [ ] Internet Knowledge for questions off topic
   - Google Answer box
