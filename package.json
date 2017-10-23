@@ -1,0 +1,23 @@
+{
+  "name": "ama-bot",
+  "version": "1.0.0",
+  "description": "Bot ask for asking me anything",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mycaule/ama-bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mycaule/ama-bot/issues"
+  },
+  "homepage": "https://github.com/mycaule/ama-bot#readme",
+  "dependencies": {
+    "apiai": "^4.0.3",
+    "express": "^4.16.2"
+  }
+}
