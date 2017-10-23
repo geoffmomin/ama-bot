@@ -1,4 +1,4 @@
-# ama-bot
+# AskMeAnything bot
 Bot ask for asking me anything. (Smooch.io + Dialogflow + GitHub Issues + Node.js)
 
 Test the bot here: https://mycaule.github.io/ama-bot/
@@ -38,4 +38,6 @@ Available HTTP routes are:
   - [Wolfram API](https://products.wolframalpha.com/api/)
 - [ ] [Google API](https://www.npmjs.com/package/googleapis)
   - Calendar integration
-- [ ] Fill in [Github Issue](https://developer.github.com/v3/issues/) for unanswered questions like in [sindresorhus/ama](https://github.com/sindresorhus/ama)
+- [ ] Fill in [Github Issue](https://developer.github.com/v3/issues/) for unanswered questions like in [sindresorhus/ama](https://github.com/sindresorhus/ama):
+   - Node.js lib: https://www.npmjs.com/package/github
+- [ ] Deploy demo app on Heroku or Cloud Functions.
