@@ -1,5 +1,7 @@
 # AskMeAnything bot
-Bot ask for asking me anything. (Smooch.io + Dialogflow + GitHub Issues + Node.js)
+Bot ask for asking me anything. (Smooch.io + Dialogflow + GitHub Issues + Node.js).
+
+See this blog post for explanations: https://mycaule.github.io/2017/10/24/chatbot/
 
 Test the bot here: https://mycaule.github.io/ama-bot/
 
@@ -13,12 +15,12 @@ Proof of concept of a chatbot with integrated backoffices:
 
 Fill in the secrets file with API keys `config/secrets.json`.
 
-| Domain     | Key name           | Documentation                                                                              |
-|------------|--------------------|--------------------------------------------------------------------------------------------|
-| DialogFlow | clientAccessToken  |                                                                                            |
-| Smooch     | appId              | appId can be found in the homepage `https://app.smooch.io/apps/{appId}`                    |
-| Smooch     | keyId              | Generate this in the Secrets keys section of `https://app.smooch.io/apps/{appId}/settings` |
-| Smooch     | secretKey          | Generate this in the Secrets keys section of `https://app.smooch.io/apps/{appId}/settings` |
+| Domain     | Key name             | Documentation                                                                              |
+|------------|----------------------|--------------------------------------------------------------------------------------------|
+| DialogFlow | `clientAccessToken`  | In the Agent General properties, refer to the API keys section                             |
+| Smooch     | `appId`              | `appId` can be found in the homepage `https://app.smooch.io/apps/{appId}`                  |
+| Smooch     | `keyId`              | Generate this in the Secrets keys section of `https://app.smooch.io/apps/{appId}/settings` |
+| Smooch     | `secretKey`          | Generate this in the Secrets keys section of `https://app.smooch.io/apps/{appId}/settings` |
 
 ```
 npm install
@@ -62,6 +64,12 @@ docker logs <container id>
 docker exec -it <container id> /bin/bash
 ```
 
+## Deploy image on a cluster
+
+- [Docker Cloud](https://cloud.docker.com/stack/deploy/?repo=https://github.com/mycaule/ama-bot): works with AWS...
+- Google Cloud Container Enginer: TODO, see this [blog post from me](http://mycaule.github.io/2017/10/19/scalable-microservices-lesson2/).
+
+
 ## Routes
 
 Available HTTP routes are:
@@ -77,6 +85,10 @@ Available HTTP routes are:
   - [Wolfram API](https://products.wolframalpha.com/api/)
 - [ ] [Google API](https://www.npmjs.com/package/googleapis)
   - Calendar integration
+- [ ] Orchestrate the different microservices with GraphQL.
 - [ ] Fill in [Github Issue](https://developer.github.com/v3/issues/) for unanswered questions like in [sindresorhus/ama](https://github.com/sindresorhus/ama):
    - Node.js lib: https://www.npmjs.com/package/github
-- [ ] Deploy demo app on Heroku or Cloud Functions.
+- [ ] Deployment methods:
+  - [ ] Deploy serverless application on Cloud Functions
+  - [ ] Deploy application on Heroku
+  - [ ] Deploy packaged application on Cloud Container Engine
