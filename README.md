@@ -13,6 +13,13 @@ Proof of concept of a chatbot with integrated backoffices:
 
 Fill in the secrets file with API keys `config/secrets.json`.
 
+| Domain     | Key name           | Documentation                                                                              |
+|------------|--------------------|--------------------------------------------------------------------------------------------|
+| DialogFlow | clientAccessToken  |                                                                                            |
+| Smooch     | appId              | appId can be found in the homepage `https://app.smooch.io/apps/{appId}`                    |
+| Smooch     | keyId              | Generate this in the Secrets keys section of `https://app.smooch.io/apps/{appId}/settings` |
+| Smooch     | secretKey          | Generate this in the Secrets keys section of `https://app.smooch.io/apps/{appId}/settings` |
+
 ```
 npm install
 nodemon app.js
