@@ -4,6 +4,7 @@
   "description": "Bot ask for asking me anything",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +21,7 @@
     "apiai": "^4.0.3",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "smooch-core": "^5.2.0"
   }
 }

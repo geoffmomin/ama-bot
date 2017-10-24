@@ -23,6 +23,38 @@ Configure the following two Smooch integration in their web interface:
 - Web messenger
 - Webhooks
 
+## Deploy with Docker
+
+See [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
+
+```
+# Rebuilding the image
+docker build -t mycaule/ama-bot .
+```
+
+```
+# Pulling existing build from docker.io
+docker pull mycaule/ama-bot
+
+# Listing images
+docker images
+
+# Create secrets.json locally
+vi config/secrets.json
+
+# Running the image with a redirection to local port 8080
+docker run -p 8080:3000 -v <full path to config>/secrets.json:/usr/src/app/config/secrets.json -d mycaule/ama-bot
+
+# Listing docker processes
+docker ps
+
+# Printing app output
+docker logs <container id>
+
+# Enter the container
+docker exec -it <container id> /bin/bash
+```
+
 ## Routes
 
 Available HTTP routes are:
