@@ -6,3 +6,4 @@ config
 images
 public
 .jshintrc
+.DS_Store

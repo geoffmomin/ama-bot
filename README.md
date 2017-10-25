@@ -11,9 +11,17 @@ Proof of concept of a chatbot with integrated backoffices:
  - Dialogflow for user intent configuration,
  - GitHub issues for fallbacks.
 
+Deployment follows the best practices for production as of 2017.
+
 ## Setup
 
-Fill in the secrets file with API keys `config/secrets.json`.
+1. Configure the following two Smooch integration in their web interface: Web messenger, Webhooks
+
+2. Create an agent using Dialogflow and plug-in the Smalltalk option.
+
+3. Fill in the secrets file with API keys `config/secrets.json`.
+
+4. Install this app and run it!
 
 | Domain     | Key name             | Documentation                                                                              |
 |------------|----------------------|--------------------------------------------------------------------------------------------|
@@ -22,17 +30,24 @@ Fill in the secrets file with API keys `config/secrets.json`.
 | Smooch     | `keyId`              | Generate this in the Secrets keys section of `https://app.smooch.io/apps/{appId}/settings` |
 | Smooch     | `secretKey`          | Generate this in the Secrets keys section of `https://app.smooch.io/apps/{appId}/settings` |
 
+## Running the code locally
+
 ```
+# Install node dependencies
 npm install
+
+# App will be running on port 3000
 nodemon app.js
+
+# Generate a public URL with ngrok tunnel
 ngrok http 3000
 ```
 
-Configure the following two Smooch integration in their web interface:
-- Web messenger
-- Webhooks
+You also have to configure Smooch webhook url smooch with the public ngrok url at this point.
 
-## Deploy with Docker
+## Running the code on production
+
+### Creating a Docker image
 
 See [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
 
@@ -52,7 +67,7 @@ docker images
 vi config/secrets.json
 
 # Running the image with a redirection to local port 8080
-docker run -p 8080:3000 -v <full path to config>/secrets.json:/usr/src/app/config/secrets.json -d mycaule/ama-bot
+docker run -p 8080:3000 -v </full/local/path/to/config>:/usr/src/app/config -d mycaule/ama-bot
 
 # Listing docker processes
 docker ps
@@ -64,11 +79,25 @@ docker logs <container id>
 docker exec -it <container id> /bin/bash
 ```
 
-## Deploy image on a cluster
+### Deploy using Heroku
 
-- [Docker Cloud](https://cloud.docker.com/stack/deploy/?repo=https://github.com/mycaule/ama-bot): works with AWS...
-- Google Cloud Container Enginer: TODO, see this [blog post from me](http://mycaule.github.io/2017/10/19/scalable-microservices-lesson2/).
+See [Heroku - Container Registry & Runtime](https://devcenter.heroku.com/articles/container-registry-and-runtime)
 
+Heroku does not support the following Dockerfile commands: `VOLUME`, `EXPOSE`.
+
+```
+heroku container:login
+heroku create
+heroku container:push web
+```
+
+### Deploy using Docker Cloud
+
+- [Docker Cloud](https://cloud.docker.com/stack/deploy/?repo=https://github.com/mycaule/ama-bot): works only with AWS or Azure...
+
+### Deploy using Google Cloud Container Engine / Kubernetes
+
+TODO. See this [blog post from me](http://mycaule.github.io/2017/10/19/scalable-microservices-lesson2/).
 
 ## Routes
 
@@ -90,5 +119,5 @@ Available HTTP routes are:
    - Node.js lib: https://www.npmjs.com/package/github
 - [ ] Deployment methods:
   - [ ] Deploy serverless application on Cloud Functions
-  - [ ] Deploy application on Heroku
-  - [ ] Deploy packaged application on Cloud Container Engine
+  - [x] Deploy application on Heroku
+  - [x] Deploy packaged application on Cloud Container Engine
