@@ -19,11 +19,10 @@ const smooch = new Smooch({
 
 // Default GET route for the web messenger client
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+  res.redirect('https://mycaule.github.io/ama-bot/');
 });
 
-app.use('/coverr', express.static(__dirname + '/coverr'));
-app.use('/smooch', express.static(__dirname + '/smooch'));
+// app.use('/', express.static(__dirname + '/public'));
 
 // POST webhook route for Smooch
 app.post('/', function (req, res) {
