@@ -23,8 +23,15 @@
     </div>
 
     <script>
+      var url = new URL(window.location.href);
+
+      // Smooch appId has to be defined in the URL by one of the following methods:
+      // - https://domain.com/full/path/59edee9d81ae79002a4816f1/
+      // - https://domain.com/full/path/?appId=59edee9d81ae79002a4816f1
+      var appId = url.searchParams.get('appId') || url.pathname.split('/').filter(n => n.length > 0).pop();
+
       Smooch.init({
-        appId: '59edee9d81ae79002a4816f1'
+        appId: appId
       });
     </script>
   </body>

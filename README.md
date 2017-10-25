@@ -1,17 +1,13 @@
 # AskMeAnything bot
-Bot ask for asking me anything. (Smooch.io + Dialogflow + GitHub Issues + Node.js).
+Bot ask for asking me anything.
 
-See this blog post for explanations: https://mycaule.github.io/2017/10/24/chatbot/
-
-Test the bot here: https://mycaule.github.io/ama-bot/
+[Demo](https://mycaule-ama-bot.herokuapp.com/) | [Blog post](https://mycaule.github.io/2017/10/24/chatbot/)
 
 ![screenshot](images/screenshot.png)
 
-Proof of concept of a chatbot with integrated backoffices:
- - Dialogflow for user intent configuration,
- - GitHub issues for fallbacks.
+Ready for production chatbot with integrated SaaS backoffices.
 
-Deployment follows the best practices for production as of 2017.
+The application use this stack : Smooch.io + Dialogflow + GitHub Issues + Node.js + Docker.
 
 ## Setup
 
@@ -39,17 +35,19 @@ npm install
 # App will be running on port 3000
 nodemon app.js
 
-# Generate a public URL with ngrok tunnel
+# Optional, generate a public URL with ngrok tunnel
 ngrok http 3000
 ```
 
-You also have to configure Smooch webhook url smooch with the public ngrok url at this point.
+You also have to configure Smooch webhook url with the public url at this point. You can create one using [ngrok](https://ngrok.com) for example.
+
+See [Smooch - Receiving Messages](https://docs.smooch.io/guide/receiving-messages/).
 
 ## Running the code on production
 
-### Creating a Docker image
+I use Docker to put the application inside a container so that it can be deployed to any cloud platform you like.
 
-See [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
+### Creating a Docker image
 
 ```
 # Rebuilding the image
@@ -57,17 +55,14 @@ docker build -t mycaule/ama-bot .
 ```
 
 ```
-# Pulling existing build from docker.io
-docker pull mycaule/ama-bot
-
 # Listing images
 docker images
 
-# Create secrets.json locally
+# Make sure to have the secrets.json locally
 vi config/secrets.json
 
-# Running the image with a redirection to local port 8080
-docker run -p 8080:3000 -v </full/local/path/to/config>:/usr/src/app/config -d mycaule/ama-bot
+# Running the image with a redirection to local port 80
+docker run -p 80:3000 -v </full/local/path/to/config>:/usr/src/app/config -d mycaule/ama-bot
 
 # Listing docker processes
 docker ps
@@ -79,11 +74,11 @@ docker logs <container id>
 docker exec -it <container id> /bin/bash
 ```
 
+See [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
+
 ### Deploy using Heroku
 
-See [Heroku - Container Registry & Runtime](https://devcenter.heroku.com/articles/container-registry-and-runtime)
-
-Heroku does not support the following Dockerfile commands: `VOLUME`, `EXPOSE`.
+Run the following commands to deploy the Docker image to Heroku.
 
 ```
 heroku container:login
@@ -91,9 +86,14 @@ heroku create
 heroku container:push web
 ```
 
-### Deploy using Docker Cloud
+Please note that Heroku does not support the following Dockerfile commands: `EXPOSE`, `VOLUME`. Hence, the HTTP port is defined by Heroku and the config variables have to be defined using `heroku config:set` command or on their interface.
+To do so, please have the following variables defined in `process.env` context: `dialogflow_clientAccessToken`, `smooch_appId`, `smooch_keyId`, `smooch_secretKey`.
 
-- [Docker Cloud](https://cloud.docker.com/stack/deploy/?repo=https://github.com/mycaule/ama-bot): works only with AWS or Azure...
+See [Heroku - Container Registry & Runtime](https://devcenter.heroku.com/articles/container-registry-and-runtime) and [Heroku - Configuration and Config Vars](https://devcenter.heroku.com/articles/config-vars)
+
+### Configure Smooch with production URL
+
+![smooch webhook](images/smooch-webhook.png)
 
 ### Deploy using Google Cloud Container Engine / Kubernetes
 
@@ -117,7 +117,7 @@ Available HTTP routes are:
 - [ ] Orchestrate the different microservices with GraphQL.
 - [ ] Fill in [Github Issue](https://developer.github.com/v3/issues/) for unanswered questions like in [sindresorhus/ama](https://github.com/sindresorhus/ama):
    - Node.js lib: https://www.npmjs.com/package/github
-- [ ] Deployment methods:
-  - [ ] Deploy serverless application on Cloud Functions
+- [x] Deployment methods:
   - [x] Deploy application on Heroku
   - [x] Deploy packaged application on Cloud Container Engine
+  - [ ] Optional: Deploy serverless application on Cloud Functions

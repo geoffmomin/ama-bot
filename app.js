@@ -5,7 +5,22 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.json());
 
-let secrets = require('./config/secrets.json');
+let secrets;
+
+try {
+  secrets = {
+    dialogflow: {
+      clientAccessToken: process.env.dialogflow_clientAccessToken
+    },
+    smooch: {
+      appId: process.env.smooch_appId,
+      keyId: process.env.smooch_keyId,
+      secretKey: process.env.smooch_secretKey
+    }
+  };
+
+  secrets = require('./config/secrets.json');
+} catch (e) {}
 
 const Apiai = require('apiai');
 let dialog = Apiai(secrets.dialogflow.clientAccessToken);
@@ -17,15 +32,15 @@ const smooch = new Smooch({
     scope: 'app'
 });
 
-// Default GET route for the web messenger client
-app.get('/', function(req, res){
-  res.redirect('https://mycaule.github.io/ama-bot/');
+app.use('/webchat/:appId', express.static(__dirname + '/public'));
+
+app.get('*', (req, res) => {
+  let appId = secrets.smooch.appId;
+  res.redirect(`/webchat/${appId}`);
 });
 
-// app.use('/', express.static(__dirname + '/public'));
-
 // POST webhook route for Smooch
-app.post('/', function (req, res) {
+app.post('/', (req, res) => {
   let json = req.body;
 
   let textQuery = json.messages ? json.messages[0].text : "";
@@ -63,6 +78,8 @@ app.post('/', function (req, res) {
   request.end();
 });
 
-app.listen(3000, function () {
+let port = process.env.PORT || 3000;
+
+app.listen(port, () => {
   console.log('App listening on port 3000!')
 });
