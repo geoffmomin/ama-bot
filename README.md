@@ -45,9 +45,11 @@ See [Smooch - Receiving Messages](https://docs.smooch.io/guide/receiving-message
 
 ## Running the code on production
 
-I use Docker to put the application inside a container so that it can be deployed to any cloud platform you like.
+I use Docker to put the application inside a container so that it can be deployed to any cloud platform you like. Application containers have the advantage to be language agnostic for the host and they provide standard operations to deploy, run and monitor your apps.
 
-### Creating a Docker image
+See [Google - Scalable Microservices with Kubernetes](https://www.udacity.com/course/scalable-microservices-with-kubernetes--ud615)
+
+### Deploy locally
 
 ```
 # Rebuilding the image
@@ -62,7 +64,7 @@ docker images
 vi config/secrets.json
 
 # Running the image with a redirection to local port 80
-docker run -p 80:3000 -v </full/local/path/to/config>:/usr/src/app/config -d mycaule/ama-bot
+docker run -p 80:3000 -v $PWD/config:/usr/src/app/config -d mycaule/ama-bot
 
 # Listing docker processes
 docker ps
@@ -95,9 +97,61 @@ See [Heroku - Container Registry & Runtime](https://devcenter.heroku.com/article
 
 ![smooch webhook](images/smooch-webhook.png)
 
-### Deploy using Google Cloud Container Engine / Kubernetes
+### Deploy using App Engine
 
-TODO. See this [blog post from me](http://mycaule.github.io/2017/10/19/scalable-microservices-lesson2/).
+[Demo](https://ama-bot.appspot.com/)
+
+[Configure docker for Cloud Repositories](Configure docker for Cloud Repositories):
+```
+gcloud components install docker-credential-gcr
+docker-credential-gcr configure-docker
+```
+
+```
+gcloud app deploy --project ama-bot
+```
+
+The environment variables are defined in `env_variables` section of `app.yaml` file.
+
+See [Google - Configuring your App with app.yaml](https://cloud.google.com/appengine/docs/flexible/custom-runtimes/configuring-your-app-with-app-yaml).
+
+### Deploy using Cloud Container Engine
+
+This method is for deploying the Docker image on *Google Cloud Platform*.
+
+### TODO
+- [ ] How to handle volumes with `kubectl`?
+
+Make sure to have a *Compute Engine* instance first, if you don't check [this](http://mycaule.github.io/2017/10/19/scalable-microservices-lesson2/) and [this](http://mycaule.github.io/2017/10/20/scalable-microservices-lesson3/) posts.
+
+```
+# Upload the docker image to Container Registry
+export PROJECT_ID="$(gcloud config get-value project -q)"
+docker build -t gcr.io/${PROJECT_ID}/ama-bot .
+
+# Create a new cluster
+gcloud container clusters create k0
+gcloud components install kubectl
+
+# List available instances
+gcloud compute instances list
+
+# Deploy the application
+kubectl run ama-bot --image=gcr.io/${PROJECT_ID}/ama-bot --port 8080
+
+# List available deployments
+kubectl get pods
+
+# Expose the application
+kubectl expose deployment ama-bot --type=LoadBalancer --port 80 --target-port 8080
+
+# List available exposed services, EXTERNAL-IP
+kubectl get services
+```
+
+![GCP external IP](images/gcp-external-ip.png)
+
+See [Google - Deploying a containerized web application](https://cloud.google.com/container-engine/docs/tutorials/hello-app).
 
 ## Routes
 
