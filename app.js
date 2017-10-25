@@ -34,7 +34,7 @@ const smooch = new Smooch({
 
 app.use('/webchat/:appId', express.static(__dirname + '/public'));
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   let appId = secrets.smooch.appId;
   res.redirect(`/webchat/${appId}`);
 });
@@ -79,7 +79,4 @@ app.post('/', (req, res) => {
 });
 
 let port = process.env.PORT || 3000;
-
-app.listen(port, () => {
-  console.log('App listening on port 3000!')
-});
+app.listen(port, () => console.log(`App running on port ${port}`));
