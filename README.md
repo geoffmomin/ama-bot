@@ -99,7 +99,7 @@ See [Heroku - Container Registry & Runtime](https://devcenter.heroku.com/article
 
 ### Deploy using App Engine
 
-[Demo](https://ama-bot.appspot.com/)
+[Demo](https://askmeanything-f8d1c.appspot.com)
 
 [Configure docker for Cloud Repositories](Configure docker for Cloud Repositories):
 ```
@@ -108,10 +108,11 @@ docker-credential-gcr configure-docker
 ```
 
 ```
-gcloud app deploy --project ama-bot
+gcloud app deploy --project ama-bot app.yaml
 ```
 
 The environment variables are defined in `env_variables` section of `app.yaml` file.
+Create one using the template found in `/config/app.template.yaml`.
 
 See [Google - Configuring your App with app.yaml](https://cloud.google.com/appengine/docs/flexible/custom-runtimes/configuring-your-app-with-app-yaml).
 

@@ -1,0 +1,7 @@
+runtime: custom
+env: flex
+env_variables:
+   dialogflow_clientAccessToken: 'ff'
+   smooch_appId: 'ff'
+   smooch_keyId: 'ff'
+   smooch_secretKey: 'ff'
