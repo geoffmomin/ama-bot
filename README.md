@@ -63,8 +63,11 @@ docker images
 # Make sure to have the secrets.json locally
 vi config/secrets.json
 
-# Running the image with a redirection to local port 80
-docker run -p 80:3000 -v $PWD/config:/usr/src/app/config -d mycaule/ama-bot
+# Running the image with a redirection to local port 8080
+docker run -p 8080:3000 -v $PWD/config:/usr/src/app/config -d mycaule/ama-bot
+
+# In production
+# docker run -e "NODE_ENV=production" --rm -it --init -m "300M" --memory-swap "1G" -p 80:3000 -v $PWD/config:/usr/src/app/config --name "ama-bot" -d mycaule/ama-bot
 
 # Listing docker processes
 docker ps
@@ -73,7 +76,7 @@ docker ps
 docker logs <container id>
 
 # Enter the container
-docker exec -it <container id> /bin/bash
+docker exec -it <container id> /bin/sh
 ```
 
 See [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).

@@ -4,5 +4,10 @@ node_modules
 npm-debug.log
 config
 images
+app.yaml
 .jshintrc
 .DS_Store
+.gitignore
+.git
+.dockerignore
+Dockerfile

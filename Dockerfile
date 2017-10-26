@@ -1,7 +1,9 @@
-# This dockerfile has been built using https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
+# This file has been written using these recommendations
+# https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
+# https://github.com/nodejs/docker-node/
+# https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md
 
-FROM node:boron
-
+FROM node:alpine
 WORKDIR /usr/src/app
 COPY package.json .
 RUN npm install
@@ -11,5 +13,8 @@ COPY . .
 VOLUME /usr/src/app/config
 EXPOSE 3000
 
-# Script `npm start` is defined in package.json
-CMD ["npm", "start"]
+ENV NODE_ENV production
+ENV NPM_CONFIG_LOGLEVEL info
+
+USER node
+CMD ["node", "app.js"]
