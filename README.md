@@ -163,15 +163,11 @@ Available HTTP routes are:
 - `GET /`: A web interface for the chatbot,
 - `POST /`: A webhook implementing Smooch and Dialogflow REST API calls.
 
-## TODO
+## Roadmap
 - [x] Implement a webchat bot on Smooch.io
-- [x] [Dialogflow](https://dialogflow.com) and Smalltalk Intent
-- [ ] Internet Knowledge for questions off topic
-  - Google Answer box
-  - [DuckDuckGo Instant Answer API](https://duckduckgo.com/api)
-  - [Wolfram API](https://products.wolframalpha.com/api/)
-- [ ] [Google API](https://www.npmjs.com/package/googleapis)
-  - Calendar integration
+- [x] [Dialogflow](https://dialogflow.com) and Smalltalk Intent (see my NPM package [knowledge-graph-js](https://github.com/mycaule/epures))
+- [ ] Internet Knowledge for questions off topic (see my NPM package [knowledge-graph-js](https://github.com/mycaule/knowledge-graph-js))
+- [ ] [Google API](https://www.npmjs.com/package/googleapis) Calendar integration
 - [ ] Orchestrate the different microservices with GraphQL.
 - [ ] Fill in [Github Issue](https://developer.github.com/v3/issues/) for unanswered questions like in [sindresorhus/ama](https://github.com/sindresorhus/ama):
    - Node.js lib: https://www.npmjs.com/package/github
